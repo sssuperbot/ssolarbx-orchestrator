@@ -1,0 +1,14 @@
+[bot_servers]
+solarbx-main ansible_host=5.161.181.72 ansible_user=notarb
+solarbx-i ansible_host=45.55.54.6 ansible_python_interpreter="/usr/bin/python3"
+solarbx-ii ansible_host=24.144.121.96
+solarbx-iii ansible_host=159.223.108.21
+solarbx-iv ansible_host=159.89.33.40
+solarbx-v ansible_host=159.89.43.23
+solarbx-vi ansible_host=165.227.221.225
+solarbx-vii ansible_host=67.207.83.180
+solarbx-viii ansible_host=159.65.217.53
+solarbx-ix ansible_host=5.161.236.177
+solarbx-x ansible_host=5.161.42.155
+solarbx-xi ansible_host=5.161.68.24
+solarbx-xii ansible_host=5.161.196.125

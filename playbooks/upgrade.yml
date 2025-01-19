@@ -1,0 +1,37 @@
+- name: Upgrade solarbx bot
+  hosts: bot_servers
+  tasks:
+    - name: Create the "bot" folder if it does not exist
+      ansible.builtin.file:
+        path: ~/bot
+        state: directory
+        mode: "0755"
+    - name: Download the Latest Release of SolArb
+      command: >
+        wget --header="Authorization: token {{ github_token }}" 
+        "https://github.com/sssuperbot/ssolarbx-bin/archive/refs/tags/{{ bot_version }}.tar.gz"
+      args:
+        chdir: ~/bot
+    - name: Uncompress Downloaded tar.gz File
+      shell: |
+        tar -xvzf {{ bot_version }}.tar.gz
+      args:
+        chdir: ~/bot
+    - name: Upload the keypiar file with variables
+      template:
+        src: "../files/keypair.txt.j2"
+        dest: "~/bot/ssolarbx-bin-{{ bot_version }}/keypair.txt"
+    - name: Upload the bot config file with variables
+      template:
+        src: "../files/bot-config.toml.j2"
+        dest: "~/bot/ssolarbx-bin-{{ bot_version }}/bot-config.toml"
+    - name: Setup cron
+      shell: |
+        ./setup-cron.sh
+      args:
+        chdir: ~/bot/ssolarbx-bin-{{ bot_version }}
+    - name: Starting screen
+      shell: |
+        ./run-screens.sh
+      args:
+        chdir: ~/bot/ssolarbx-bin-{{ bot_version }}
