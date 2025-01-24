@@ -1,0 +1,12 @@
+- name: Update Config solarbx bot
+  hosts: bot_servers
+  tasks:
+    - name: Upload the bot config file with variables
+      template:
+        src: "../files/bot-config.toml.j2"
+        dest: "~/bot/ssolarbx-bin-{{ bot_version }}/bot-config.toml"
+    - name: Starting screen
+      shell: |
+        ./run-screens.sh
+      args:
+        chdir: ~/bot/ssolarbx-bin-{{ bot_version }}
