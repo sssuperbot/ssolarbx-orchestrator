@@ -12,3 +12,6 @@ solarbx-ix ansible_host=5.161.236.177
 solarbx-x ansible_host=5.161.42.155
 solarbx-xi ansible_host=5.161.68.24
 solarbx-xii ansible_host=5.161.196.125
+solarbx-xiii ansible_host=147.182.129.172
+solarbx-xiv ansible_host=67.205.134.162
+solarbx-xv ansible_host=5.161.232.110

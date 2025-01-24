@@ -10,8 +10,6 @@ services:
       - ./inventory:/ansible/inventory
       - ./playbooks:/ansible/playbooks
       - ./roles:/ansible/roles
-      - ./group_vars:/ansible/group_vars
-      - ./host_vars:/ansible/host_vars
       - ~/.ssh:/root/.ssh:ro
     environment:
       - ANSIBLE_CONFIG=/ansible/ansible.cfg
