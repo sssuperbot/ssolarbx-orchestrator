@@ -5,14 +5,14 @@ url="https://api.mainnet-beta.solana.com"
 keypair_path="keypair.txt"
 swap_threads={{ swap_threads }}
 bind_ips=[
-  {% for ip in bind_ips %}
-    "{{ ip }}"{% if not loop.last %},{% endif %}
-  {% endfor %}
+{% for ip in bind_ips %}
+  "{{ ip }}"{% if not loop.last %},{% endif %}
+{% endfor %}
 ]
 jito_bind_ips=[
-  {% for ip in jito_bind_ips %}
-    "{{ ip }}"{% if not loop.last %},{% endif %}
-  {% endfor %}
+{% for ip in jito_bind_ips %}
+  "{{ ip }}"{% if not loop.last %},{% endif %}
+{% endfor %}
 ]
 
 [jupiter]
@@ -29,9 +29,12 @@ tips=[
 ]
 delay=0.35 # secs
 
+{% for config in jito_configs %}
 [[jito]]
-enabled=true
-url="https://ny.mainnet.block-engine.jito.wtf"
+enabled={{ config.enabled | lower }}
+url="{{ config.url }}"
+
+{% endfor %}
 
 [dynamic_mints]
 url="https://tokens.jup.ag/tokens"
@@ -42,8 +45,9 @@ tags=[
 update_seconds=3600 # every hrs
 
 [swap]
-mint="EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" # USDC
-decimal=6
+mint="{{ mint }}" # USDC
+decimal={{ mint_decimal }}
+wrap_and_unwrap_sol={{ wrap_and_unwrap_sol }}
 min_spend={{ min_spend }}
 max_spend={{ max_spend }}
 min_gain={{ min_gain }}
