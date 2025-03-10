@@ -1,22 +1,23 @@
 [rpc]
-url="https://api.mainnet-beta.solana.com"
+url = "https://api.mainnet-beta.solana.com"
 
 [bot_misc]
-keypair_path="keypair.txt"
-swap_threads={{ swap_threads }}
-bind_ips=[
+keypair_path = "keypair.txt"
+swap_threads = {{ swap_threads }}
+bind_ips = [
 {% for ip in bind_ips %}
   "{{ ip }}"{% if not loop.last %},{% endif %}
 {% endfor %}
 ]
-jito_bind_ips=[
+jito_bind_ips = [
 {% for ip in jito_bind_ips %}
   "{{ ip }}"{% if not loop.last %},{% endif %}
 {% endfor %}
 ]
 
 [jupiter]
-url="https://public.jupiterapi.com"
+url= " {{ jupiter_url }}"
+api_key = "{{ jupiter_api_key }}"
 tips=[
     "96gYZGLnJYVFmbjzopPSU6QiEV5fGqZNyN9nmNhvrZU5",
     "HFqU5x63VTqvQss8hp11i4wVV8bD44PvwucfZ2bU7gRe",
@@ -27,33 +28,59 @@ tips=[
     "DttWaMuVvTiduZRnguLF7jNxTgiMBZ1hyAumKUiL2KRL",
     "3AVi9Tg9Uo68tJfuvoKvqKNWKkC5wPdSSdeBnizKZ6jT"
 ]
-delay=0.35 # secs
+delay = {{ jupiter_delay }} # secs
+
+[jito_misc]
+tips = [
+    "96gYZGLnJYVFmbjzopPSU6QiEV5fGqZNyN9nmNhvrZU5",
+    "HFqU5x63VTqvQss8hp11i4wVV8bD44PvwucfZ2bU7gRe",
+    "Cw8CFyM9FkoMi7K7Crf6HNQqf4uEMzpKw6QNghXLvLkY",
+    "ADaUMid9yfUytqMBgopwjb2DTLSokTSzL1zt6iGPaS49",
+    "DfXygSm4jCyNCybVYYK6DwvWqjKee8pbDmJGcLWNDXjh",
+    "ADuUkR4vqLUMWXxW9gh6D6L8pMSawimctcNZ5pGwDcEt",
+    "DttWaMuVvTiduZRnguLF7jNxTgiMBZ1hyAumKUiL2KRL",
+    "3AVi9Tg9Uo68tJfuvoKvqKNWKkC5wPdSSdeBnizKZ6jT"
+]
 
 {% for config in jito_configs %}
 [[jito]]
-enabled={{ config.enabled | lower }}
+enabled = {{ config.enabled | lower }}
 url="{{ config.url }}"
 
 {% endfor %}
 
 [dynamic_mints]
-url="https://tokens.jup.ag/tokens"
+url = "https://tokens.jup.ag/tokens"
 tags=[
     "birdeye-trending",
     "verified"
 ]
-update_seconds=3600 # every hrs
+update_seconds = 3600 # every hrs
+
+[static_mints]
+enabled = {{ static_mints_enabled | lower }}
+mints = [
+{% for mint in static_mints %}
+  "{{ mint }}"{% if not loop.last %},{% endif %}
+{% endfor %}
+]
 
 [swap]
-mint="{{ mint }}" # USDC
-decimal={{ mint_decimal }}
-wrap_and_unwrap_sol={{ wrap_and_unwrap_sol }}
-min_spend={{ min_spend }}
-max_spend={{ max_spend }}
-min_gain={{ min_gain }}
-jito_static_tip_lamports={{ jito_static_tip_lamports }} # ~0.001 USDC
-fetch_blockhash=10 # Secs
+mint = "{{ mint }}" # USDC
+wrap_and_unwrap_sol = {{ wrap_and_unwrap_sol | lower }}
+only_direct_routes = {{ only_direct_routes | lower }}
+min_spend = {{ min_spend }}
+max_spend = {{ max_spend }}
+min_gain = {{ min_gain }}
+auto_max_spend = {{ auto_max_spend | lower }}
+jito_static_tip_lamports = {{ jito_static_tip_lamports }} # ~0.001 USDC
+jito_static_tip_percent = {{ jito_static_tip_percent }}
+fetch_blockhash = 10 # Secs
+cu_limit_per_route = {{ cu_limit_per_route }}
+proxy_wallet = {{ proxy_wallet | lower}}
+transfer_proxy_lamports = {{ transfer_proxy_lamports }}
+proxy_cu_limit = {{ proxy_cu_limit }}
 
 [close_account]
-enabled=true
-sol_min=0.04
+enabled = true
+sol_min = 0.05

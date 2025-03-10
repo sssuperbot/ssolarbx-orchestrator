@@ -1,2 +1,4 @@
 [bot_servers]
+; <name-host> ansible_host=<ip-host>
 solarbx-main ansible_host=
+
