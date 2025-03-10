@@ -6,10 +6,9 @@
         path: ~/bot
         state: directory
         mode: "0755"
-    - name: Download the Latest Release of SolArb
+    - name: Download the Latest Release of SolArbx
       command: >
-        wget --header="Authorization: token {{ github_token }}" 
-        "https://github.com/sssuperbot/ssolarbx-bin/archive/refs/tags/{{ bot_version }}.tar.gz"
+        wget "https://github.com/sssuperbot/ssolarbx-bin/archive/refs/tags/{{ bot_version }}.tar.gz"
       args:
         chdir: ~/bot
     - name: Uncompress Downloaded tar.gz File

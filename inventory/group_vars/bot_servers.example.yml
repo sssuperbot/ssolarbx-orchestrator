@@ -1,10 +1,6 @@
-bot_version: "0.1.18-alpha"
-# bot_version: "0.2.1-beta"
-github_token: "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"
+bot_version: "0.2.1-beta"
 jupiter_url: "https://public.jupiterapi.com"
 jupiter_api_key: ""
-# jupiter_url: "https://jupiter-swap-lb.solanatracker.io/jupiter"
-# jupiter_api_key: "808587ba-7724-4aa0-aa71-85bff36eb392"
 jupiter_delay: 0.3
 cu_limit_per_route: 120000
 static_mints:

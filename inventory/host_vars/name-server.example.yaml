@@ -1,0 +1,27 @@
+keypair: ""
+swap_threads: 2
+bind_ips:
+  - "<ip4>"
+  - "<ip6>"
+  - "<ip4>"
+  - "<ip6>"
+jito_bind_ips:
+  - "<ip4>"
+jito_configs:
+  - enabled: true
+    url: "https://ny.mainnet.block-engine.jito.wtf"
+  - enabled: true
+    url: "https://mainnet.block-engine.jito.wtf"
+mint: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+wrap_and_unwrap_sol: false
+static_mints_enabled: false
+only_direct_routes: false
+min_spend: 1
+max_spend: 30
+min_gain: 0.004
+auto_max_spend: false
+jito_static_tip_lamports: 6000
+jito_static_tip_percent: 40
+proxy_wallet: false
+transfer_proxy_lamports: 1000000
+proxy_cu_limit: 500
