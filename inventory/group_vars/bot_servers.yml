@@ -1,12 +1,27 @@
-bot_version: "0.1.18-alpha"
-# bot_version: "0.2.1-beta"
-github_token: "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"
+bot_version: "0.2.1-beta"
+github_token: ""
+
+mint: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+mint_decimal: 6
+
 jupiter_url: "https://public.jupiterapi.com"
-jupiter_api_key: ""
-# jupiter_url: "https://jupiter-swap-lb.solanatracker.io/jupiter"
-# jupiter_api_key: "808587ba-7724-4aa0-aa71-85bff36eb392"
+jupiter_api_key: null
+min_spend: 1
+max_spend: 40
 jupiter_delay: 0.3
+
+jito_static_tip_lamports: 6000
+jito_static_tip_percent: 60
+
+auto_max_spend: true
 cu_limit_per_route: 120000
+
+proxy_wallet: true
+transfer_proxy_lamports: 1000000
+proxy_cu_limit: 500
+
+
+static_mints_enabled: false
 static_mints:
   - "So11111111111111111111111111111111111111112"
   - "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN"
@@ -14,3 +29,11 @@ static_mints:
   - "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"
   - "27G8MtK7VtTcCHkpASjSDdkWWYfoqT6ggEuKidVJidD4"
   - "J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn"
+min_gain: 0.005
+wrap_and_unwrap_sol: true
+only_direct_routes: false
+jito_configs:
+  - enabled: true
+    url: "https://ny.mainnet.block-engine.jito.wtf"
+  - enabled: true
+    url: "https://mainnet.block-engine.jito.wtf"
