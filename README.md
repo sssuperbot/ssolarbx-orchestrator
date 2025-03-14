@@ -24,4 +24,7 @@ ansible-playbook  playbooks/update-config.yml
 
 # apply some host
 ansible-playbook  playbooks/update-config.yml --limit <name-host>
+
+## 3. create droplet
+ansible-playbook playbooks/create_droplets.yml
 ```
