@@ -1,0 +1,59 @@
+- name: Create DigitalOcean Droplets
+  hosts: localhost
+  gather_facts: false
+  vars:
+    do_api_token: ""
+    droplet_names:
+      - "ansible-1"
+      - "ansible-2"
+    region: "nyc1"
+    size: "s-1vcpu-512mb-10gb"
+    image: "ubuntu-22-04-x64"
+    project_name: "solarbx"
+    template_file: "../../files/host_vars.yml.j2"
+    cloud_init_script: |
+      #cloud-config
+        users:
+          - name: solarbx
+            groups: sudo
+            shell: /bin/bash
+            sudo: ['ALL=(ALL) NOPASSWD:ALL']
+            ssh_authorized_keys:
+              - ssh-ed25519 XXX
+
+  tasks:
+    - name: Create Droplets with IPv4 & IPv6
+      community.digitalocean.digital_ocean_droplet:
+        state: present
+        oauth_token: "{{ do_api_token }}"
+        name: "{{ item }}"
+        region: "{{ region }}"
+        size: "{{ size }}"
+        image: "{{ image }}"
+        ipv6: true
+        monitoring: true
+        project: "{{ project_name }}"
+        tags: ["solarbx"]
+        user_data: "{{ cloud_init_script }}"
+        timeout: 120
+        wait: true
+      loop: "{{ droplet_names }}"
+      register: droplet_results
+    
+    - name: Generate Local Files for Each Droplet
+      ansible.builtin.template:
+        src: "{{ template_file }}"
+        dest: "../inventory/host_vars/{{ item.data.droplet.name }}.yml"
+      loop: "{{ droplet_results.results }}"
+      vars:
+        ipv4: "{{ item.data.droplet.networks.v4[0].ip_address }}"
+        ipv6: "{{ item.data.droplet.networks.v6[0].ip_address | default('No IPv6 assigned') }}"
+
+    - name: Append Droplet Host Information to File
+      ansible.builtin.lineinfile:
+        path: "../inventory/droplet_hosts.txt"
+        line: "{{ item.data.droplet.name }} ansible_host={{ ipv4 }}"
+        create: yes
+      loop: "{{ droplet_results.results }}"
+      vars:
+        ipv4: "{{ item.data.droplet.networks.v4[0].ip_address }}"
