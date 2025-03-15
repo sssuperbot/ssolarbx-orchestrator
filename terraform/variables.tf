@@ -115,22 +115,39 @@ variable "count_vultr_multiple_ip" {
 
 variable "droplet_configs" {
   type = map(object({
-    region = string
-    size   = string
-    image  = string
+    region                   = string
+    size                     = string
+    image                    = string
+    keypair                  = string
+    bot_version              = string
+    swap_threads             = optional(number)
+    mint                     = optional(string)
+    mint_decimal             = optional(number)
+    jupiter_url              = optional(string)
+    jupiter_api_key          = optional(string)
+    min_spend                = optional(number)
+    max_spend                = optional(number)
+    jupiter_delay            = optional(number)
+    jito_static_tip_lamports = optional(number)
+    jito_static_tip_percent  = optional(number)
+    auto_max_spend           = optional(bool)
+    cu_limit_per_route       = optional(number)
+    proxy_wallet             = optional(bool)
+    transfer_proxy_lamports  = optional(number)
+    proxy_cu_limit           = optional(number)
+    static_mints_enabled     = optional(bool)
+    static_mints             = optional(list(string))
+    min_gain                 = optional(number)
+    wrap_and_unwrap_sol      = optional(bool)
+    only_direct_routes       = optional(bool)
+    jito_configs = optional(list(object({
+      enabled = bool
+      url     = string
+    })))
   }))
   default = {}
 }
 
 variable "ansible_user" {
   type = string
-}
-
-variable "keypair" {
-  type = string
-}
-
-variable "swap_threads" {
-  type = number
-  default = 2
 }
